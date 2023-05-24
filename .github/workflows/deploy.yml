@@ -1,0 +1,62 @@
+name: Test and release
+
+on:
+  push:
+    branches: [ master, dev ]
+
+jobs:
+  test_and_release:
+    name: Test and Release
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgis/postgis:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: trm_monitoring
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.21
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Generate Swagger docs
+        run: |
+          go install github.com/swaggo/swag/cmd/swag@v1.8.6
+          cd ./src && swag init -g ./cmd/main.go
+
+      - name: Run server unit test
+        run:  make github_test_server
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USER: postgres
+          DB_PASS: password
+          DB_NAME: trm_monitoring
+
+      - name: Check server location
+        run: curl -s ipinfo.io
+
+      - name: Create build
+        run: make build
+
+      - name: Prepare SSH Connection
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 0600 ~/.ssh/id_rsa
+          ssh-keyscan  > ~/.ssh/known_hosts

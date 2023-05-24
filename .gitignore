@@ -1,0 +1,33 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+.idea*
+/.idea*
+.env
+.env.local
+.env.docker
+
+# excel tmp file
+~$*.xls*
+#swagger gen docs.111
+/src/docs
+
+.DS_Store
+
+#server static dir
+/src/static/mdb/*export.mdb
+/src/static/inspection
+/src/static/disasters
+/src/*.exe
+
+
+/src/*.sh
+coverage.out
+
+/src/build/*
+/src/vendor
