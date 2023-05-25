@@ -54,9 +54,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ""
           port: ${{ secrets.PORT }}
-          source: "./build/trm-api"
-          target: "./srv/back/bin"
-          strip_components: 1
+          source: "./build/trm-api,./docs/*"
+          target: "./srv/back/"
 
       - name: Prepare SSH Connection
         run: |
