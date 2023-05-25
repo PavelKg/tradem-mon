@@ -11,8 +11,8 @@ import (
 func SetupRoutes(app *fiber.App, presenters *presenter.Presenters, hostPrefix string) {
 
 	// FixMe it should be changed after fixing docker routing
-	//api := app.Group("/api")
-	api := app.Group(hostPrefix)
+	api := app.Group("/api")
+	//api := app.Group(hostPrefix)
 
 	api.Get("/dashboard", monitor.New())
 
