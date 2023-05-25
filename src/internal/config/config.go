@@ -36,7 +36,7 @@ func GetConfig(fileNames ...string) *Config {
 	instance.IsDevelopment = getEnvVar("APP_STATUS", "dev") == "dev"
 
 	instance.Listen.Host = getEnvVar("SERVER_HOST", "0.0.0.0")
-	instance.Listen.Port = getEnvVar("SERVER_PORT", "8765")
+	instance.Listen.Port = getEnvVar("SERVER_PORT", "7654")
 
 	instance.DbParams.DbName = getEnvVar("DB_NAME", "")
 	instance.DbParams.Host = getEnvVar("DB_HOST", "localhost")
