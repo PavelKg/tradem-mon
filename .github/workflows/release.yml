@@ -38,16 +38,12 @@ jobs:
           go install github.com/swaggo/swag/cmd/swag@v1.8.6
           cd ./src && swag init -g ./cmd/main.go
 
-      - name: Check server location
-        run: curl -s ipinfo.io
-
       - name: Create build
         run: make build
 
-
-      - uses: actions/checkout@main
+      - uses: actions/checkout@master
       - name: copy file via ssh password
-        uses: appleboy/scp-action@main
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
