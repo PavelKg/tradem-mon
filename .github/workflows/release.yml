@@ -46,7 +46,7 @@ jobs:
           ls -la 
           ls -la ./build
 
-      - name: copy file via ssh password
+      - name: Copy file via ssh password
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -56,3 +56,9 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "./build/trm-api"
           target: "./srv/back/bin"
+          strip_components: 1
+
+      - name: Restart Container
+        run: |
+          ssh ${{ secrets.USERNAME@secrets.HOST }} "cd ./srv \
+          && docker compose -f ./docker-compose.yml restart trm-api"    
