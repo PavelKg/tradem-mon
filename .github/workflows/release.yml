@@ -63,7 +63,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 0600 ~/.ssh/id_rsa
-          ssh-keyscan secrets.HOST > ~/.ssh/known_hosts
+          ssh-keyscan trmon.pepex.kg > ~/.ssh/known_hosts
 
       - name: Restart Container
         run: |
