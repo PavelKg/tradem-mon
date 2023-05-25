@@ -2,7 +2,7 @@ name: Test
 
 on:
   push:
-    branches-ignore: [ master, dev ]
+    branches-ignore: [ main, dev ]
 
 jobs:
   test:
@@ -11,7 +11,7 @@ jobs:
 
     services:
       postgres:
-        image: postgis/postgis:latest
+        image: postgres/postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
