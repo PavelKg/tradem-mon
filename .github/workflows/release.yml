@@ -45,6 +45,7 @@ jobs:
         run: |
           ls -la 
           ls -la ./build
+          ls -la ./cmd/
 
       - uses: actions/checkout@master
       - name: copy file via ssh password

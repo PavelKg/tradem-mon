@@ -34,7 +34,7 @@ github_test_server:
 	cd ./src/cmd && go test ./...
 
 build:
-	 docker-compose run --no-deps trm-api go build -o cmd/trm-api cmd/main.go
+	 docker-compose run --no-deps trm-api go build -o build/trm-api cmd/main.go
 
 swagger:
 	swagger init
