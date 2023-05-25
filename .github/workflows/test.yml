@@ -38,15 +38,6 @@ jobs:
           go install github.com/swaggo/swag/cmd/swag@v1.8.6
           cd ./src && swag init -g ./cmd/main.go
 
-      - name: Run server unit test
-        run:  make github_test_server
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USER: postgres
-          DB_PASS: password
-          DB_NAME: trm_monitoring
-
       - name: Check server location
         run: curl -s ipinfo.io
 

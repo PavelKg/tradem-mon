@@ -34,7 +34,7 @@ func JWTProtected(key string) func(*fiber.Ctx) error {
 
 func jwtError(c *fiber.Ctx, err error) error {
 	// Return status 401 and failed authentication error.
-	log.Println("{JWT} %s", err.Error())
+	log.Printf("{JWT} %s", err.Error())
 	if err.Error() == "Missing or malformed JWT" {
 		return c.Status(fiber.StatusUnauthorized).JSON(err.Error())
 	}

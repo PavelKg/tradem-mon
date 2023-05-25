@@ -1,0 +1,45 @@
+version: "3"
+
+volumes:
+  trm-api-postgres:
+
+services:
+  db:
+    image: postgres:15-alpine
+    shm_size: 1g
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: trm-monitoring
+    volumes:
+      - trm-api-postgres:/var/lib/postgresql/data
+      - ./db/:/db/
+    ports:
+      - "5432:5432"
+  web:
+    image: nginx
+    ports:
+      - 8008:80
+    volumes:
+      - ./front/src:/usr/share/nginx/html
+  trm-api:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    hostname: api
+    image: trm-api:latest
+    restart: always
+    container_name: trm-api
+    command: go run cmd/main.go
+    ports:
+      - "7654:7654"
+    volumes:
+      - ./src/:/app/
+      - ./build/:/app/build/
+    environment:
+      - DB_USER=postgres
+      - DB_PASS=password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=trm-monitoring
