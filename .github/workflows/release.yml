@@ -67,5 +67,5 @@ jobs:
 
       - name: Restart Container
         run: |
-          ssh ${{ secrets.HOST }} -l ${{ secrets.USERNAME }} "cd ./srv \
+          ssh secrets.HOST -l secrets.USERNAME "cd ./srv \
           && docker compose -f ./docker-compose.yml restart trm-api"    
