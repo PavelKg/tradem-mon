@@ -45,7 +45,6 @@ jobs:
         run: |
           ls -la 
           ls -la ./build
-          ls -la ./cmd/
 
       - uses: actions/checkout@master
       - name: copy file via ssh password
@@ -56,5 +55,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ""
           port: ${{ secrets.PORT }}
-          source: "src/cmd/trm-api"
+          source: "./build/trm-api"
           target: "./srv/back/bin"
