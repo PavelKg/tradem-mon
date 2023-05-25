@@ -50,5 +50,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ""
           port: ${{ secrets.PORT }}
-          source: "./build/trm-api"
+          source: "src/cmd/trm-api"
           target: "./srv/back/bin"
