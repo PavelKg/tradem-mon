@@ -14,10 +14,9 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 
 	_ "github.com/pavelkg/tradem-mon-api/docs"
+	"github.com/pavelkg/tradem-mon-api/internal/config"
 	"github.com/pavelkg/tradem-mon-api/internal/database"
 	"github.com/pavelkg/tradem-mon-api/internal/presenter"
-
-	"github.com/pavelkg/tradem-mon-api/internal/config"
 	"github.com/pavelkg/tradem-mon-api/internal/router"
 
 	"github.com/pavelkg/tradem-mon-api/internal/domain/service"
@@ -49,6 +48,7 @@ func main() {
 		}
 	}
 
+	const jwtSecret = "ilsdahJHILUuygaiosb2345"
 	//var log = logging.NewLogger(logging.Config{Output: logOutput})
 
 	dbConn, err := database.New(conf.DbParams)
@@ -63,7 +63,7 @@ func main() {
 	}
 	log.Println("{APP} App repository loaded")
 
-	services, err := service.NewServices(repository, conf.JwtSecret)
+	services, err := service.NewServices(repository)
 	if err != nil {
 		log.Fatal(fmt.Sprint("Failed to load App service: ", err))
 	}
@@ -81,7 +81,7 @@ func main() {
 	}))
 	app.Static("/files/img", "./static/img")
 
-	router.SetupRoutes(app, presenter, conf.HostPrefix)
+	router.SetupRoutes(app, presenter, conf.HostPrefix, jwtSecret)
 
 	json.MarshalIndent(app.Stack(), "", "  ")
 

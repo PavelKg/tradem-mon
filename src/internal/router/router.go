@@ -8,7 +8,7 @@ import (
 )
 
 // SetupRoutes func to set up src routes
-func SetupRoutes(app *fiber.App, presenters *presenter.Presenters, hostPrefix string) {
+func SetupRoutes(app *fiber.App, presenters *presenter.Presenters, hostPrefix string, jwtKey string) {
 
 	// FixMe it should be changed after fixing docker routing
 	api := app.Group("/api")
@@ -17,6 +17,6 @@ func SetupRoutes(app *fiber.App, presenters *presenter.Presenters, hostPrefix st
 	api.Get("/dashboard", monitor.New())
 
 	SwaggerRoute(api)
-	NewUserRoutes(api, presenters.UserPresenter)
+	NewUserRoutes(api, presenters.UserPresenter, jwtKey)
 	NotFoundRoute(app)
 }

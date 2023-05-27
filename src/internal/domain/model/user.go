@@ -12,8 +12,8 @@ type User struct {
 }
 
 type UserAuthData struct {
-	Sub  string `json:"username" validate:"required,min=3,max=32""`
-	Pass string `json:"password" validate:"required,min=3,max=32"" `
+	Sub  string `json:"username" validate:"required,min=3,max=32"`
+	Pass string `json:"password" validate:"required,min=3,max=32"`
 }
 
 type UserContent struct {
@@ -60,5 +60,5 @@ type UserPresenter interface {
 
 // TableName set DB table name for model User
 func (User) TableName() string {
-	return "app_users"
+	return "users"
 }

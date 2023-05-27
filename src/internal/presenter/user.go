@@ -197,13 +197,13 @@ func (pr *userPresenter) LoginUser(c *fiber.Ctx) error {
 	//if err != nil {
 	//	return c.SendStatus(fiber.StatusForbidden)
 	//}
-	//secret, _ := pr.appService.GetAppJwtSecret()
-	//signedToken, err := utils.JwtGenSignedToken(login, secret)
-	//if err != nil {
-	//	pr.log.Error(err)
-	//	return c.SendStatus(fiber.StatusForbidden)
-	//}
-	//pr.log.Info("{APP} user %s logged in", login)
+	secret := "ilsdahJHILUuygaiosb2345" //pr.appService.GetAppJwtSecret()
+	signedToken, err := utils.JwtGenSignedToken(person.Sub, secret)
+	if err != nil {
+		fmt.Println(err)
+		return c.SendStatus(fiber.StatusForbidden)
+	}
+	log.Println("{APP} user %s logged in", person.Sub)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"access_token": signedToken})
 }
 

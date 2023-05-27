@@ -13,7 +13,7 @@ type Handlers struct {
 	Users model.UserService
 }
 
-func NewServices(repo *repository.Repositories, jwtSecret string) (*Handlers, error) {
+func NewServices(repo *repository.Repositories) (*Handlers, error) {
 	users := NewUserService(repo.User)
 
 	handlers := &Handlers{

@@ -8,14 +8,13 @@ import (
 	// _ "github.com/pavelkg/tradem-mon-api/internal/middleware"
 )
 
-func NewUserRoutes(router fiber.Router, userHandlers model.UserPresenter) {
+func NewUserRoutes(router fiber.Router, userHandlers model.UserPresenter, key string) {
 
 	//var featureName = "user"
 	// Create "auth" route group.
 	routeAuth := router.Group("/auth")
 	routeAuth.Post("/login", userHandlers.LoginUser)
 	// Only JWT protected allow
-	key := "kjsdlfja"
 	routeAuth.Use(middleware.JWTProtected(key))
 
 	routeAuth.Get("/me",
