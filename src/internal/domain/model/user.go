@@ -6,13 +6,22 @@ import (
 )
 
 type User struct {
-	Login      string `json:"login"`
+	Name       string `json:"name"`
+	UserName   string `json:"user_name"`
 	Email      string `json:"email"`
 	gorm.Model `json:"-"`
 }
 
+type UserDto struct {
+	Name       string `json:"name"`
+	UserName   string `json:"user_name"`
+	Email      string `json:"email"`
+	Password   string `json:"password"`
+	gorm.Model `json:"-"`
+}
+
 type UserAuthData struct {
-	Sub  string `json:"username" validate:"required,min=3,max=32"`
+	Sub  string `json:"email" validate:"required,min=3,max=32"`
 	Pass string `json:"password" validate:"required,min=3,max=32"`
 }
 
@@ -23,9 +32,9 @@ type UserContent struct {
 
 // MeProperties is an app user personal props
 type MeProperties struct {
-	Login string `json:"login"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	UserName string `json:"user_name"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
 }
 
 // UserRepository represent the user's repository contract

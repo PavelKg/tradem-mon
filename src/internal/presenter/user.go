@@ -59,11 +59,9 @@ func (pr *userPresenter) Get(ctx *fiber.Ctx) error {
 // @Tags Users
 // @Accept json
 // @Produce json
-// @Param login body string true "login"
+// @Param name body string true "Name"
 // @Param email body string true "Email"
-// @Param first_name body string true "First name"
-// @Param last_name body string true "Last name"
-// @Param role_id body int true "roles id"
+// @Param username body string true "Username"
 // @Success 201
 // @Failed 400 If body is incorrect or there is service err
 // @Router /api/users/ [post]
@@ -169,7 +167,8 @@ func (pr *userPresenter) GetUserPersonalProps(c *fiber.Ctx) error {
 		return c.Status(404).JSON(err.Error())
 	}
 
-	meProps.Login = user.Login
+	meProps.Name = user.Name
+	meProps.UserName = user.UserName
 	meProps.Email = user.Email
 	if err != nil {
 		log.Print(err)
