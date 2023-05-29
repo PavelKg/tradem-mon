@@ -41,7 +41,7 @@ type MeProperties struct {
 type UserRepository interface {
 	GetByID(login string) (User, error)
 	Get() ([]User, error)
-	Create(u User) error
+	Create(u UserDto) error
 	Update(login string, user User) error
 	Delete(login string) error
 }
@@ -51,7 +51,7 @@ type UserService interface {
 	GetUserById(login string) (User, error)
 	GetUserPersonalProps(login string) (MeProperties, error)
 	Get() ([]User, error)
-	Create(u User) error
+	Create(u UserDto) error
 	Update(login string, user User) error
 	Delete(login string) error
 }

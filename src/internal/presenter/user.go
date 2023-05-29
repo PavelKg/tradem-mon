@@ -66,7 +66,7 @@ func (pr *userPresenter) Get(ctx *fiber.Ctx) error {
 // @Failed 400 If body is incorrect or there is service err
 // @Router /api/users/ [post]
 func (pr *userPresenter) Create(ctx *fiber.Ctx) error {
-	var userData model.User
+	var userData model.UserDto
 
 	if err := ctx.BodyParser(&userData); err != nil {
 		fmt.Println(err.Error())

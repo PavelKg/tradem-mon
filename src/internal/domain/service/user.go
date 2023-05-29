@@ -20,7 +20,7 @@ func (u userService) Get() ([]model.User, error) {
 }
 
 // Create send request to create a new user
-func (u userService) Create(userData model.User) error {
+func (u userService) Create(userData model.UserDto) error {
 	return u.userRepo.Create(userData)
 }
 
